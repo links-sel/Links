@@ -1,111 +1,233 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Мои соц сети</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoopMarket 🔥📦 — Весняний Дроп</title>
+    <link href="https://t.me/qqwjek" rel="stylesheet">
+    <style>
+        :root { --accent: #ff85a2; --dark: #1a1a1a; --gray: #f5f5f7; --green: #2d6a4f; }
+        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; transition: 0.2s ease; }
+        
+        body { font-family: 'Inter', sans-serif; background: #fafafa; margin: 0; color: var(--dark); overflow-x: hidden; }
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+        /* HEADER */
+        header { 
+            padding: 15px 20px; position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #eee;
+            display: flex; flex-direction: column; align-items: center; gap: 12px;
+        }
+        .top { width: 100%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
+        .logo { font-family: 'Manrope'; font-size: 20px; font-weight: 800; color: var(--dark); text-decoration: none; }
+        
+        .search-input { 
+            width: 100%; max-width: 500px; padding: 12px 18px; border-radius: 14px; 
+            border: 1px solid #eee; font-size: 14px; outline: none; background: #fff;
+        }
+        .search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,133,162,0.1); }
 
-  <style>
-    * { box-sizing: border-box; }
+        /* КАТЕГОРІЇ */
+        .cats { display: flex; gap: 8px; overflow-x: auto; width: 100%; max-width: 1200px; padding: 5px 0; scrollbar-width: none; }
+        .cat-btn { 
+            padding: 8px 16px; background: #fff; border-radius: 12px; border: 1px solid #eee;
+            font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer; color: #666;
+        }
+        .cat-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Inter', sans-serif;
-      background: radial-gradient(circle at top, #2b2b2b, #000000 75%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-    }
+        /* ГРИД ТОВАРІВ */
+        .grid { 
+            display: grid; grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; padding: 20px 15px; max-width: 1200px; margin: 0 auto;
+        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } }
 
-    .wrap {
-      width: 100%;
-      max-width: 420px;
-      padding: 20px;
-      text-align: center;
-    }
+        .card { background: #fff; border-radius: 20px; padding: 12px; border: 1px solid #f2f2f2; cursor: pointer; position: relative; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 24px rgba(0,0,0,0.05); }
+        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; }
+        .card h3 { font-size: 14px; margin: 10px 0 5px; font-weight: 600; }
+        .card b { color: var(--green); font-size: 16px; font-family: 'Manrope'; }
 
-    .avatar {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 auto 16px;
-      display: block;
-      box-shadow: 0 0 0 3px rgba(255,255,255,0.08), 0 16px 35px rgba(0,0,0,0.7);
-    }
+        /* МОДАЛЬНІ ВІКНА */
+        .modal { 
+            position: fixed; inset: 0; background: rgba(0,0,0,0.5); 
+            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+        .modal-content { 
+            background: #fff; width: 100%; max-width: 450px; border-radius: 28px; padding: 30px; 
+            position: relative; animation: pop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        
+        .close-x { position: absolute; top: 20px; right: 20px; font-size: 24px; cursor: pointer; color: #bbb; }
+        
+        .qty-control { display: flex; align-items: center; gap: 15px; margin: 20px 0; background: var(--gray); padding: 10px; border-radius: 15px; width: fit-content; }
+        .qty-btn { width: 32px; height: 32px; border-radius: 8px; border: none; background: #fff; cursor: pointer; font-weight: 800; }
 
-    h1 {
-      margin: 0 0 6px;
-      font-size: 22px;
-      font-weight: 700;
-    }
+        /* ПІДТРИМКА (ВІДЖЕТ) */
+        .help-fab { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
+        .help-main { width: 55px; height: 55px; background: var(--dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .help-list { position: absolute; bottom: 65px; right: 0; background: #fff; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); display: none; padding: 12px; min-width: 180px; border: 1px solid #eee; }
+        .help-list a { display: flex; align-items: center; gap: 10px; padding: 12px; text-decoration: none; color: var(--dark); font-size: 14px; font-weight: 600; border-radius: 10px; }
+        .help-list a:hover { background: var(--gray); }
 
-    p {
-      margin: 0 0 26px;
-      font-size: 14px;
-      opacity: 0.7;
-    }
+        /* КОШИК */
+        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--gray); border-radius: 15px; margin-bottom: 10px; }
+        .remove-x { color: #ff3b30; cursor: pointer; font-size: 20px; font-weight: 800; padding: 5px; }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .btn {
-      background: linear-gradient(180deg, #2a2a2a, #141414);
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      text-decoration: none;
-      color: #fff;
-      font-weight: 600;
-      font-size: 15px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 8px 20px rgba(0,0,0,0.6);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12), 0 12px 28px rgba(0,0,0,0.8);
-    }
-
-    .btn.big {
-      grid-column: 1 / -1;
-    }
-
-    footer {
-      margin-top: 24px;
-      font-size: 12px;
-      opacity: 0.5;
-    }
-  </style>
+        .btn-action { background: var(--dark); color: #fff; border: none; padding: 16px; width: 100%; border-radius: 16px; font-weight: 700; cursor: pointer; font-size: 15px; margin-top: 15px; }
+        .input-order { width: 100%; padding: 14px; margin-bottom: 10px; border-radius: 14px; border: 1px solid #eee; outline: none; font-family: inherit; }
+    </style>
 </head>
 <body>
 
-  <div class="wrap">
+<header>
+    <div class="top">
+        <div class="logo">LoopMarket 🔥📦</div>
+        <button onclick="toggleCart()" style="background:#fff; border:1px solid #eee; padding:10px 18px; border-radius:14px; font-weight:700; cursor:pointer;">🛒 <span id="cartCount">0</span></button>
+    </div>
+    <input type="text" class="search-input" id="search" placeholder="Пошук речей (ножі, годинники...)">
+    <div class="cats" id="catNav">
+        <div class="cat-btn active" data-cat="all">Всі товари</div>
+        <div class="cat-btn" data-cat="ножі">Ножі</div>
+        <div class="cat-btn" data-cat="годинники">Годинники</div>
+        <div class="cat-btn" data-cat="гаджети">Гаджети</div>
+    </div>
+</header>
 
-    <!-- АВАТАРКА -->
-    <img class="avatar" src="https://papik.pro/uploads/posts/2023-03/1678194504_papik-pro-p-krutie-risunki-dlya-avi-dlya-patsanov-47.jpg" alt="avatar">
+<div class="grid" id="grid"></div>
 
-    <h1>Мои соц сети</h1>
-    <p>Все ссылки ниже</p>
+<!-- ВІДЖЕТ ПІДТРИМКИ -->
+<div class="help-fab">
+    <div class="help-list" id="helpList">
+        <a href="https://t.me">🔵 Telegram</a>
+        <a href="viber://chat?number=+380990000000">🟣 Viber</a>
+        <a href="tel:+380990000000">📞 Подзвонити</a>
+    </div>
+    <div class="help-main" onclick="document.getElementById('helpList').style.display = (document.getElementById('helpList').style.display == 'block' ? 'none' : 'block')">💬</div>
+</div>
 
-    <div class="grid">
-      <a class="btn" href="https://t.me/qqweedg" target="_blank">Telegram</a>
-      <a class="btn" href="https://vb.me/switchToViber" target="_blank">Viber</a>
-      <a class="btn big" href="https://youtube.com/@boomua-d2w?si=sgHywmuZrEkv0e-S" target="_blank">YouTube</a>
-      <a class="btn big" href="https://www.tiktok.com/@yuami1377?_r=1&_t=ZM-92SnLh8Og9L" target="_blank">TikTok</a>
-      <a class="btn big" href="https://t.me/+hP21Lxw9ihk1ZDcy" target="_blank">Telegram канал</a>
-      <a class="btn big" href="https:////boomua2026.github.io/my-fireworks-shop/" target="_blank">Мой магазин</a>
-   </div>
+<!-- МОДАЛКА ТОВАРУ -->
+<div class="modal" id="pModal" onclick="if(event.target==this)closeP()">
+    <div class="modal-content">
+        <span class="close-x" onclick="closeP()">&times;</span>
+        <img id="mImg" src="" style="width:100%; height:220px; object-fit:cover; border-radius:20px; margin-bottom:15px;">
+        <h2 id="mTitle" style="font-family:'Manrope'; margin:0; font-size:22px;"></h2>
+        <p id="mDesc" style="color:#666; font-size:14px; line-height:1.6; margin:10px 0;"></p>
+        <b id="mPrice" style="font-size:20px; color:var(--green);"></b>
+        
+        <div class="qty-control">
+            <span>Кількість:</span>
+            <button class="qty-btn" onclick="changeQty(-1)">-</button>
+            <b id="mQtyNum">1</b>
+            <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        
+        <button class="btn-action" id="addBtn">Додати до кошика</button>
+    </div>
+</div>
 
-    <footer>© 2025 • Link page</footer>
-  </div>
+<!-- МОДАЛКА КОШИКА -->
+<div class="modal" id="cModal" onclick="if(event.target==this)toggleCart()">
+    <div class="modal-content">
+        <h2 style="font-family:'Manrope'; margin-top:0;">Твій кошик 📦</h2>
+        <div id="cartList" style="max-height: 280px; overflow-y:auto; margin-bottom:15px;"></div>
+        
+        <input type="text" id="uName" class="input-order" placeholder="Прізвище та Ім'я">
+        <input type="text" id="uPhone" class="input-order" placeholder="+380 __ ___ __ __">
+        
+        <div style="display:flex; justify-content:space-between; margin-top:15px; font-weight:800; font-size:18px;">
+            <span>Разом:</span> <span id="total">0</span> грн
+        </div>
+        
+        <button class="btn-action" onclick="checkout()">🚀 ОФОРМИТИ ЗАМОВЛЕННЯ</button>
+    </div>
+</div>
 
+<script>
+const products = [
+    { id: 1, cat: 'ножі', name: 'Tactical Blade "Zen"', price: 2150, desc: 'Сталь D2, руків\'я G10. Ідеальний для походів та тактичних задач.', img: 'https://images.unsplash.com' },
+    { id: 2, cat: 'годинники', name: 'Loop Watch Graphite', price: 5800, desc: 'Керамічний корпус, сапфірове скло, 10 днів без підзарядки.', img: 'https://images.unsplash.com' },
+    { id: 3, cat: 'гаджети', name: 'PowerLoop Mini 20k', price: 1450, desc: 'Компактний павербанк на 20000 mAh. Швидка зарядка PD 20W.', img: 'https://images.unsplash.com' },
+    { id: 4, cat: 'гаджети', name: 'Air Buds Bloom Edition', price: 3200, desc: 'Кришталевий звук, весняний дизайн, 30 годин музики.', img: 'https://images.unsplash.com' },
+    { id: 5, cat: 'ножі', name: 'Folding Knife "Spirit"', price: 1100, desc: 'Кишеньковий складаний ніж. Компактний та дуже гострий.', img: 'https://images.unsplash.com' },
+    { id: 6, cat: 'годинники', name: 'Classic Green Loop', price: 4900, desc: 'Класичний дизайн з сучасними смарт-функціями.', img: 'https://images.unsplash.com' }
+];
+
+let cart = [];
+let qNow = 1;
+let pNow = null;
+
+function render(items) {
+    document.getElementById('grid').innerHTML = items.map(p => `
+        <div class="card" onclick="openP(${p.id})">
+            <img src="${p.img}">
+            <h3>${p.name}</h3>
+            <b>${p.price} грн</b>
+        </div>
+    `).join('');
+}
+
+function openP(id) {
+    pNow = products.find(x => x.id === id);
+    qNow = 1;
+    document.getElementById('mTitle').innerText = pNow.name;
+    document.getElementById('mDesc').innerText = pNow.desc;
+    document.getElementById('mPrice').innerText = pNow.price + ' грн';
+    document.getElementById('mImg').src = pNow.img;
+    document.getElementById('mQtyNum').innerText = qNow;
+    document.getElementById('pModal').style.display = 'flex';
+    
+    document.getElementById('addBtn').onclick = () => {
+        const exist = cart.find(x => x.id === pNow.id);
+        if(exist) exist.qty += qNow; else cart.push({...pNow, qty: qNow});
+        updateUI();
+        closeP();
+    };
+}
+
+function changeQty(v) { qNow = Math.max(1, qNow + v); document.getElementById('mQtyNum').innerText = qNow; }
+function closeP() { document.getElementById('pModal').style.display = 'none'; }
+function toggleCart() { const m = document.getElementById('cModal'); m.style.display = (m.style.display == 'flex' ? 'none' : 'flex'); }
+function removeItem(id) { cart = cart.filter(x => x.id !== id); updateUI(); }
+
+function updateUI() {
+    document.getElementById('cartCount').innerText = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cartList').innerHTML = cart.map(i => `
+        <div class="cart-item">
+            <div style="font-size:13px"><b>${i.name}</b><br>${i.qty} шт. — ${i.price * i.qty} грн</div>
+            <span class="remove-x" onclick="removeItem(${i.id})">✖</span>
+        </div>
+    `).join('') || "<center style='color:gray; padding:20px;'>Порожньо 🌸</center>";
+    document.getElementById('total').innerText = cart.reduce((s, i) => s + (i.price * i.qty), 0);
+}
+
+function checkout() {
+    const name = document.getElementById('uName').value;
+    const phone = document.getElementById('uPhone').value;
+    if(!name || !phone || cart.length === 0) return alert("Заповніть всі дані!");
+
+    let list = cart.map(i => `• ${i.name} x${i.qty} — ${i.price * i.qty} грн`).join('%0A');
+    let text = `Нове замовлення LoopMarket 🔥%0A👤 Ім'я: ${name}%0A📞 Тел: ${phone}%0A%0A📦 Товари:%0A${list}%0A%0A💰 Разом: ${document.getElementById('total').innerText} грн`;
+    window.open(`https://t.me/qqwjek`, '_blank');
+}
+
+// ПЕРЕВІРКА ПОШУКУ ТА КАТЕГОРІЙ
+document.getElementById('search').oninput = (e) => {
+    const v = e.target.value.toLowerCase();
+    render(products.filter(p => p.name.toLowerCase().includes(v)));
+};
+
+document.getElementById('catNav').onclick = (e) => {
+    if(e.target.classList.contains('cat-btn')) {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        const c = e.target.dataset.cat;
+        render(c === 'all' ? products : products.filter(p => p.cat === c));
+    }
+};
+
+render(products);
+</script>
 </body>
 </html>
