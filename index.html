@@ -218,15 +218,13 @@ function checkout() {
         return;
     }
 
-    // Формуємо список товарів с указанием размеров, количества и суммы
     let itemsText = cart.map(i => {
-        let size = i.size ? ` (${i.size})` : ''; // если есть размер
+        let size = i.size ? ` (${i.size})` : '';
         return `• ${i.name}${size} x${i.qty} — ${i.price * i.qty} грн`;
     }).join('\n');
 
     let finalSum = cart.reduce((s, i) => s + (i.price * i.qty), 0);
 
-    // Сообщение как на скриншоте
     let message = `Нове замовлення:
 Ім'я: ${name}
 Телефон: ${phone}
@@ -236,13 +234,21 @@ ${itemsText}
 
 Всього: ${finalSum} грн`;
 
-    // Ник админа (замени на свой)
     const tgNick = "L0opMarket"; 
-
-    // Безопасная ссылка
     const url = `https://t.me/${tgNick}?text=${encodeURIComponent(message)}`;
 
     window.open(url, "_blank");
+
+    // ✅ ОЧИСТКА
+    cart = [];
+    updateUI();
+
+    document.getElementById('uName').value = '';
+    document.getElementById('uPhone').value = '';
+
+    toggleCart();
+
+    document.getElementById('successModal').style.display = 'flex';
 }
 
 // ПОШУК ТА КАТЕГОРІЇ
@@ -261,6 +267,29 @@ document.getElementById('catNav').onclick = (e) => {
 };
 
 render(products);
+</script>
+<!-- МОДАЛКА УСПЕХА -->
+<div class="modal" id="successModal">
+    <div class="modal-content" style="text-align:center;">
+        <h2 style="font-family:'Manrope';">✅ Дякуємо за замовлення!</h2>
+        <p style="color:#666;">Ми зв'яжемося з вами найближчим часом 📦</p>
+        <button class="btn-main" onclick="closeSuccess()">Закрити</button>
+    </div>
+</div>
+
+<!-- МОДАЛКА УСПЕХА -->
+<div class="modal" id="successModal">
+    <div class="modal-content" style="text-align:center;">
+        <h2 style="font-family:'Manrope';">✅ Дякуємо за замовлення!</h2>
+        <p style="color:#666;">Ми зв'яжемося з вами найближчим часом 📦</p>
+        <button class="btn-main" onclick="closeSuccess()">Закрити</button>
+    </div>
+</div>
+
+<script>
+function closeSuccess() {
+    document.getElementById('successModal').style.display = 'none';
+}
 </script>
 </body>
 </html>
