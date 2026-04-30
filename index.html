@@ -1,295 +1,113 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoopMarket 🔥📦 — Весняний Дроп</title>
-    <!-- ПРЕМІАЛЬНІ ШРИФТИ -->
-    <link href="https://fonts.googleapis.com" rel="stylesheet">
-    <style>
-        :root { --accent: #ff85a2; --dark: #1a1a1a; --gray: #f5f5f7; --green: #2d6a4f; }
-        * { box-sizing: border-box; -webkit-font-smoothing: antialiased; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        
-        body { font-family: 'Inter', sans-serif; background: #fafafa; margin: 0; color: var(--dark); overflow-x: hidden; }
+<meta charset="UTF-8">
+<title>My Links</title>
 
-        /* АНІМАЦІЯ ПРИ ЗАВАНТАЖЕННІ */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff9ecf, #ffc3e6, #ffd6f0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: #fff;
+}
 
-        /* HEADER */
-        header { 
-            padding: 15px 20px; position: sticky; top: 0; z-index: 100;
-            background: rgba(255,255,255,0.85); backdrop-filter: blur(20px); border-bottom: 1px solid #eee;
-            display: flex; flex-direction: column; align-items: center; gap: 12px;
-        }
-        .top { width: 100%; display: flex; justify-content: space-between; align-items: center; max-width: 1200px; }
-        .logo { font-family: 'Manrope'; font-size: 22px; font-weight: 800; letter-spacing: -1px; cursor: pointer; }
-        
-        .search-container { width: 100%; max-width: 450px; position: relative; }
-        .search-input { 
-            width: 100%; padding: 10px 15px; border-radius: 12px; 
-            border: 1px solid #eee; font-size: 14px; outline: none; background: #fff;
-        }
+/* Карточка с анимацией появления */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 1.5s ease;
+    z-index: 2;
+}
 
-        /* КАТЕГОРІЇ */
-        .cats { display: flex; gap: 10px; overflow-x: auto; width: 100%; max-width: 1200px; padding: 5px 0; scrollbar-width: none; }
-        .cat-btn { 
-            padding: 8px 16px; background: #fff; border-radius: 12px; border: 1px solid #eee;
-            font-size: 13px; font-weight: 600; white-space: nowrap; cursor: pointer; color: #666;
-        }
-        .cat-btn.active { background: var(--dark); color: #fff; border-color: var(--dark); }
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
 
-        /* ТОВАРИ */
-        .grid { 
-            display: grid; grid-template-columns: repeat(2, 1fr); 
-            gap: 15px; padding: 20px 15px; max-width: 1200px; margin: 0 auto;
-            animation: fadeIn 0.8s ease-out;
-        }
-        @media (min-width: 768px) { .grid { grid-template-columns: repeat(4, 1fr); } }
+/* Ава */
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 3px solid white;
+    object-fit: cover;
+    animation: float 3s ease-in-out infinite;
+}
 
-        .card { background: #fff; border-radius: 20px; padding: 12px; border: 1px solid #f2f2f2; cursor: pointer; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
-        .card img { width: 100%; height: 180px; object-fit: cover; border-radius: 16px; }
-        .card h3 { font-size: 14px; margin: 10px 0 5px; font-weight: 600; }
-        .card b { color: var(--green); font-size: 17px; font-family: 'Manrope'; }
+@keyframes float {
+    0%,100% {transform: translateY(0);}
+    50% {transform: translateY(-10px);}
+}
 
-        /* ПІДТРИМКА */
-        .help-fab { position: fixed; bottom: 25px; right: 25px; z-index: 1000; }
-        .help-main { width: 55px; height: 55px; background: var(--dark); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
-        .help-list { position: absolute; bottom: 70px; right: 0; background: #fff; border-radius: 20px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); display: none; padding: 15px; min-width: 200px; border: 1px solid #eee; }
-        .help-list a { display: flex; align-items: center; gap: 12px; padding: 12px; text-decoration: none; color: var(--dark); font-size: 14px; font-weight: 600; border-radius: 12px; }
-        .help-list a:hover { background: var(--gray); }
+/* Кнопки */
+.btn {
+    display: block;
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 15px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-        /* МОДАЛКИ (ТОВАР ТА КОШИК) */
-        .modal { 
-            position: fixed; inset: 0; background: rgba(0,0,0,0.5); 
-            display: none; align-items: center; justify-content: center; z-index: 2000; padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-        .modal-content { 
-            background: #fff; width: 100%; max-width: 430px; border-radius: 20px; padding: 15px; 
-            position: relative; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
-        .close-btn { position: absolute; top: 25px; right: 25px; font-size: 26px; cursor: pointer; color: #ccc; }
-        .qty-box { display: flex; align-items: center; gap: 20px; margin: 25px 0; background: var(--gray); padding: 12px; border-radius: 18px; width: fit-content; }
-        .qty-btn { width: 35px; height: 35px; border-radius: 10px; border: none; background: #fff; cursor: pointer; font-weight: 800; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.instagram { background: #E1306C; }
+.tiktok { background: #000; }
+.telegram { background: #2AABEE; }
 
-        /* КОШИК ТОВАРИ */
-        .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: var(--gray); border-radius: 18px; margin-bottom: 12px; }
-        .remove-x { color: #ff3b30; cursor: pointer; font-size: 22px; font-weight: 800; padding: 5px; }
+.btn:hover {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
 
-        .btn-main { background: var(--dark); color: #fff; border: none; padding: 18px; width: 100%; border-radius: 18px; font-weight: 700; cursor: pointer; font-size: 16px; margin-top: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .btn-main:active { transform: scale(0.97); }
-        .input-order { width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 15px; border: 1px solid #eee; outline: none; font-family: 'Inter'; font-size: 14px; }
-    </style>
+/* ❤️ Сердечки */
+.heart {
+    position: absolute;
+    top: -50px;
+    font-size: 20px;
+    animation: fall linear infinite;
+    color: #ff4da6;
+    opacity: 0.8;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh);
+    }
+}
+</style>
 </head>
+
 <body>
 
-<header>
-    <div class="top">
-        <div class="logo" onclick="location.reload()">LoopMarket 🔥📦</div>
-        <button onclick="toggleCart()" style="background:#fff; border:1px solid #eee; padding:10px 20px; border-radius:15px; font-weight:700; cursor:pointer; font-family:'Manrope';">🛒 <span id="cartCount">0</span></button>
-    </div>
-    <div class="search-container">
-        <input type="text" class="search-input" id="search" placeholder="Пошук (годинники, ножі...)">
-    </div>
-    <div class="cats" id="catNav">
-        <div class="cat-btn active" data-cat="all">Всі товари</div>
-        <div class="cat-btn" data-cat="ножі">Ножі</div>
-        <div class="cat-btn" data-cat="годинники">Годинники</div>
-        <div class="cat-btn" data-cat="гаджети">Гаджети</div>
-    </div>
-</header>
+<!-- Сердечки -->
+<div class="heart" style="left:10%; animation-duration:6s;">❤️</div>
+<div class="heart" style="left:20%; animation-duration:8s;">💖</div>
+<div class="heart" style="left:35%; animation-duration:7s;">💕</div>
+<div class="heart" style="left:50%; animation-duration:9s;">💗</div>
+<div class="heart" style="left:65%; animation-duration:6s;">💞</div>
+<div class="heart" style="left:80%; animation-duration:8s;">💘</div>
+<div class="heart" style="left:90%; animation-duration:7s;">❤️</div>
 
-<div class="grid" id="grid"></div>
+<div class="card">
+    <img src="https://i.pinimg.com/236x/eb/a6/84/eba684cf1b67c0b6316d77af426d2c9b.jpg" class="avatar">
 
-<!-- ПІДТРИМКА -->
-<div class="help-fab">
-    <div class="help-list" id="helpList">
-        <a href="https://t.me/Lo0pMarket">🔵 Telegram: канал</a>
-        <a href="viber://chat?number=+38934559229">🟣 Viber: +380...</a>
-        <a href="tel:+380998269172">📞 Подзвонити</a>
-    </div>
-    <div class="help-main" onclick="let s=document.getElementById('helpList').style; s.display=s.display=='block'?'none':'block'">💬</div>
+    <a href="https://www.instagram.com/nastyakulish39" class="btn instagram">Instagram</a>
+    <a href="https://tiktok.com/@nasty2765" class="btn tiktok">TikTok</a>
+    <a href="https://t.me/qqqidjd" class="btn telegram">Telegram</a>
 </div>
 
-<!-- МОДАЛКА ТОВАРУ -->
-<div class="modal" id="pModal" onclick="if(event.target==this)closeP()">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeP()">&times;</span>
-        <img id="mImg" src="" style="width:100%; height:230px; object-fit:cover; border-radius:22px;">
-        <h2 id="mTitle" style="font-family:'Manrope'; margin:20px 0 10px; font-size:24px;"></h2>
-        <p id="mDesc" style="color:#666; font-size:14px; line-height:1.6; margin-bottom:20px;"></p>
-        <b id="mPrice" style="font-size:22px; color:var(--green); font-family:'Manrope';"></b>
-        
-        <div class="qty-box">
-            <span>Кількість:</span>
-            <button class="qty-btn" onclick="changeQty(-1)">-</button>
-            <b id="mQtyNum" style="font-size:18px;">1</b>
-            <button class="qty-btn" onclick="changeQty(1)">+</button>
-        </div>
-        
-        <button class="btn-main" id="addBtn">Додати до кошика</button>
-    </div>
-</div>
-
-<!-- МОДАЛКА КОШИКА -->
-<div class="modal" id="cModal" onclick="if(event.target==this)toggleCart()">
-    <div class="modal-content">
-        <h2 style="font-family:'Manrope'; margin-top:0; font-size:22px;">Твій кошик 📦</h2>
-        <div id="cartList" style="max-height: 280px; overflow-y:auto; margin-bottom:20px;"></div>
-        
-        <input type="text" id="uName" class="input-order" placeholder="Прізвище та Ім'я">
-        <input type="text" id="uPhone" class="input-order" placeholder="+380 __ ___ __ __">
-        
-        <div style="display:flex; justify-content:space-between; margin-top:20px; font-weight:800; font-size:20px; font-family:'Manrope';">
-            <span>Разом:</span> <span id="total">0</span> грн
-        </div>
-        
-        <button class="btn-main" onclick="checkout()">🚀 ЗАМОВИТИ ЧЕРЕЗ TELEGRAM</button>
-    </div>
-</div>
-
-<script>
-const products = [
-    { id: 1, cat: 'ножі', name: 'Портативний складний ніж для активного відпочинку"', price: 319, desc: 'Портативний складний ніж для активного відпочинку — багатоцільовий тактичний ніж для виживання з нержавіючої сталі з високою твердістю.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnPUN-peeJ-C6T_pn3DklNHZt2S2Us3r0Dc-TDyxyDCBjMVDZB' },
-    { id: 2, cat: 'годинники', name: 'Чоловічі спортивні модні водонепроникні електронні наручні годинники', price: 299, desc: 'Чоловічі спортивні модні водонепроникні електронні наручні годинники з круглим корпусом та силіконовим ремінцем для щоденного носіння', img: 'https://img.kwcdn.com/product/fancy/a9b253bf-a227-4969-a203-377a9e96f395.jpg?imageView2/2/w/1300/q/90/format/avif%7CimageVqr/1' },
-    { id: 3, cat: 'гаджети', name: 'Power Bank 20000Mah/10000Mah', price: 599, desc: 'Power Bank 20000Mah/10000Mah з дисплеєм, швидка зарядка 22.5W PD20W, портативний зарядний пристрій для подорожей на природі, вхід/вихід Type-C, підтримка зарядки 3 електронних пристроїв, сумісний з телефонами, навушниками та iPad', img: 'https://img.kwcdn.com/product/fancy/61f47762-36ec-428e-a45b-2516a5e7b16e.jpg?imageView2/2/w/1300/q/90/format/avif%7CimageVqr/1' },
-    { id: 4, cat: 'гаджети', name: 'НОВИНКА 2025: Цифрові навушники', price: 399, desc: 'НОВИНКА 2025: Цифрові навушники-вкладки з сенсорним керуванням, подвійним кольором дисплея, ультранизькою затримкою, прості та портативні – ідеальні для дзвінків, перегляду фільмів, серіалів, спорту, бігу, музики та активного відпочинку', img: 'https://img.kwcdn.com/product/fancy/6fee68c7-fa2d-4cdf-a43b-0485a6bfa917.jpg?imageView2/2/w/1300/q/90/format/avif%7CimageVqr/1' },
-    { id: 5, cat: 'ножі', name: 'Ніж для активного відпочинку та тактичного використання"', price: 249, desc: 'Ніж для активного відпочинку та тактичного використання — особистий захист, гострий, для дайвінгу та універсального застосування, з високою твердістю, інтегрований дизайн із кістки дракона, інструмент для виживання.', img: 'https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSZFYvMB_QZtoH4r_CU0BQoPVlj6CarR9RTcO5q-hp9iN1PbpGh' },
-    { id: 6, cat: 'годинники', name: 'Модні високоякісні цифрові кварцові наручні годинники', price: 149, desc: 'Модні високоякісні цифрові кварцові наручні годинники у мінімалістичному стилі для чоловіків та жінок (1 шт./набір), без коробки', img: 'https://img.kwcdn.com/product/fancy/22343b3e-e228-4f25-b205-cbace4934344.jpg?imageView2/2/w/1300/q/90/format/avif%7CimageVqr/1' }
-];
-
-let cart = [];
-let qNow = 1;
-let pNow = null;
-
-function render(items) {
-    document.getElementById('grid').innerHTML = items.map(p => `
-        <div class="card" onclick="openP(${p.id})">
-            <img src="${p.img}">
-            <h3>${p.name}</h3>
-            <b>${p.price} грн</b>
-        </div>
-    `).join('');
-}
-
-function openP(id) {
-    pNow = products.find(x => x.id === id);
-    qNow = 1;
-    document.getElementById('mTitle').innerText = pNow.name;
-    document.getElementById('mDesc').innerText = pNow.desc;
-    document.getElementById('mPrice').innerText = pNow.price + ' грн';
-    document.getElementById('mImg').src = pNow.img;
-    document.getElementById('mQtyNum').innerText = qNow;
-    document.getElementById('pModal').style.display = 'flex';
-    
-    document.getElementById('addBtn').onclick = () => {
-        const ex = cart.find(x => x.id === pNow.id);
-        if(ex) ex.qty += qNow; else cart.push({...pNow, qty: qNow});
-        updateUI(); closeP();
-    };
-}
-
-function changeQty(v) { qNow = Math.max(1, qNow + v); document.getElementById('mQtyNum').innerText = qNow; }
-function closeP() { document.getElementById('pModal').style.display = 'none'; }
-function toggleCart() { const m = document.getElementById('cModal'); m.style.display = (m.style.display == 'flex' ? 'none' : 'flex'); }
-function removeItem(id) { cart = cart.filter(x => x.id !== id); updateUI(); }
-
-function updateUI() {
-    document.getElementById('cartCount').innerText = cart.reduce((s, i) => s + i.qty, 0);
-    document.getElementById('cartList').innerHTML = cart.map(i => `
-        <div class="cart-item">
-            <div style="font-size:13px"><b>${i.name}</b><br>${i.qty} шт. — ${i.price * i.qty} грн</div>
-            <span class="remove-x" onclick="removeItem(${i.id})">✖</span>
-        </div>
-    `).join('') || "<center style='color:gray; padding:20px;'>Порожньо 🌸</center>";
-    document.getElementById('total').innerText = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-}
-
-// ПОВНІСТЮ ВИПРАВЛЕНА ФУНКЦІЯ ТЕЛЕГРАМУ
-function checkout() {
-    const name = document.getElementById('uName').value.trim();
-    const phone = document.getElementById('uPhone').value.trim();
-    
-    if(!name || !phone || cart.length === 0) {
-        alert("Заповніть всі дані та додайте товари! 📦");
-        return;
-    }
-
-    let itemsText = cart.map(i => {
-        let size = i.size ? ` (${i.size})` : '';
-        return `• ${i.name}${size} x${i.qty} — ${i.price * i.qty} грн`;
-    }).join('\n');
-
-    let finalSum = cart.reduce((s, i) => s + (i.price * i.qty), 0);
-
-    let message = `Нове замовлення:
-Ім'я: ${name}
-Телефон: ${phone}
-
-Товари:
-${itemsText}
-
-Всього: ${finalSum} грн`;
-
-    const tgNick = "L0opMarket"; 
-    const url = `https://t.me/${tgNick}?text=${encodeURIComponent(message)}`;
-
-    window.open(url, "_blank");
-
-    // ✅ ОЧИСТКА
-    cart = [];
-    updateUI();
-
-    document.getElementById('uName').value = '';
-    document.getElementById('uPhone').value = '';
-
-    toggleCart();
-
-    document.getElementById('successModal').style.display = 'flex';
-}
-
-// ПОШУК ТА КАТЕГОРІЇ
-document.getElementById('search').oninput = (e) => {
-    const v = e.target.value.toLowerCase();
-    render(products.filter(p => p.name.toLowerCase().includes(v)));
-};
-
-document.getElementById('catNav').onclick = (e) => {
-    if(e.target.classList.contains('cat-btn')) {
-        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-        e.target.classList.add('active');
-        const c = e.target.dataset.cat;
-        render(c === 'all' ? products : products.filter(p => p.cat === c));
-    }
-};
-
-render(products);
-</script>
-<!-- МОДАЛКА УСПЕХА -->
-<div class="modal" id="successModal">
-    <div class="modal-content" style="text-align:center;">
-        <h2 style="font-family:'Manrope';">✅ Дякуємо за замовлення!</h2>
-        <p style="color:#666;">Ми зв'яжемося з вами найближчим часом 📦</p>
-        <button class="btn-main" onclick="closeSuccess()">Закрити</button>
-    </div>
-</div>
-
-<!-- МОДАЛКА УСПЕХА -->
-<div class="modal" id="successModal">
-    <div class="modal-content" style="text-align:center;">
-        <h2 style="font-family:'Manrope';">✅ Дякуємо за замовлення!</h2>
-        <p style="color:#666;">Ми зв'яжемося з вами найближчим часом 📦</p>
-        <button class="btn-main" onclick="closeSuccess()">Закрити</button>
-    </div>
-</div>
-
-<script>
-function closeSuccess() {
-    document.getElementById('successModal').style.display = 'none';
-}
-</script>
 </body>
 </html>
