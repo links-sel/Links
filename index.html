@@ -2,112 +2,339 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>My Links</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ace Shop</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #ff9ecf, #ffc3e6, #ffd6f0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    color: #fff;
+body{
+margin:0;
+font-family:Inter;
+background:#f4f6f5;
 }
 
-/* Карточка с анимацией появления */
-.card {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
-    padding: 30px;
-    border-radius: 25px;
-    text-align: center;
-    width: 300px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-    animation: fadeIn 1.5s ease;
-    z-index: 2;
+header{
+background:#1b5e20;
+color:white;
+text-align:center;
+padding:18px;
+font-size:24px;
+font-weight:700;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(30px);}
-    to {opacity: 1; transform: translateY(0);}
+nav{
+display:flex;
+justify-content:center;
+gap:15px;
+background:#2e7d32;
+padding:10px;
 }
 
-/* Ава */
-.avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    border: 3px solid white;
-    object-fit: cover;
-    animation: float 3s ease-in-out infinite;
+nav button{
+background:none;
+border:none;
+color:white;
+cursor:pointer;
+font-weight:500;
 }
 
-@keyframes float {
-    0%,100% {transform: translateY(0);}
-    50% {transform: translateY(-10px);}
+section{
+display:none;
+padding:20px;
+max-width:900px;
+margin:auto;
+text-align:center;
 }
 
-/* Кнопки */
-.btn {
-    display: block;
-    margin: 10px 0;
-    padding: 12px;
-    border-radius: 15px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: 0.3s;
+.active{display:block;}
+
+.products{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:12px;
 }
 
-.instagram { background: #E1306C; }
-.tiktok { background: #000; }
-.telegram { background: #2AABEE; }
-
-.btn:hover {
-    transform: scale(1.08);
-    opacity: 0.9;
+.card{
+background:white;
+padding:12px;
+border-radius:12px;
+box-shadow:0 3px 10px rgba(0,0,0,0.08);
+position:relative;
 }
 
-/* ❤️ Сердечки */
-.heart {
-    position: absolute;
-    top: -50px;
-    font-size: 20px;
-    animation: fall linear infinite;
-    color: #ff4da6;
-    opacity: 0.8;
+.sale{
+position:absolute;
+top:-10px;
+left:10px;
+background:red;
+color:white;
+font-size:12px;
+padding:4px 8px;
+border-radius:6px;
+font-weight:700;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-    }
+.card button{
+background:#1b5e20;
+color:white;
+border:none;
+padding:7px;
+width:100%;
+margin-top:8px;
+cursor:pointer;
+border-radius:8px;
+}
+
+.stock{
+font-size:13px;
+margin-top:4px;
+font-weight:600;
+}
+
+.cartBtn{
+position:fixed;
+bottom:20px;
+right:20px;
+width:55px;
+height:55px;
+border-radius:50%;
+background:#1b5e20;
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:22px;
+cursor:pointer;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+.badge{
+position:absolute;
+top:-5px;
+right:-5px;
+background:red;
+color:white;
+font-size:12px;
+width:18px;
+height:18px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.cartBox{
+position:fixed;
+bottom:90px;
+right:20px;
+width:290px;
+background:white;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+padding:12px;
+display:none;
+}
+
+.cart-item{
+display:flex;
+justify-content:space-between;
+margin:6px 0;
+font-size:13px;
+}
+
+.smallBtn{
+border:none;
+padding:3px 6px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.total{
+font-weight:700;
+margin-top:8px;
+}
+
+.orderBtn{
+margin-top:10px;
+width:100%;
+background:#1b5e20;
+color:white;
+border:none;
+padding:10px;
+border-radius:8px;
+cursor:pointer;
+}
+
+.about{
+max-width:700px;
+margin:auto;
+line-height:1.6;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Сердечки -->
-<div class="heart" style="left:10%; animation-duration:6s;">❤️</div>
-<div class="heart" style="left:20%; animation-duration:8s;">💖</div>
-<div class="heart" style="left:35%; animation-duration:7s;">💕</div>
-<div class="heart" style="left:50%; animation-duration:9s;">💗</div>
-<div class="heart" style="left:65%; animation-duration:6s;">💞</div>
-<div class="heart" style="left:80%; animation-duration:8s;">💘</div>
-<div class="heart" style="left:90%; animation-duration:7s;">❤️</div>
+<header>Ace Shop</header>
+
+<nav>
+<button onclick="show('home')">Главная</button>
+<button onclick="show('catalog')">Каталог</button>
+<button onclick="show('about')">О нас</button>
+<button onclick="show('contact')">Контакты</button>
+</nav>
+
+<!-- HOME -->
+<section id="home" class="active">
+<h2>Добро пожаловать</h2>
+<p>Экологичные товары и саженцы</p>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+<h2>Каталог</h2>
+
+<div class="products">
 
 <div class="card">
-    <img src="https://i.pinimg.com/236x/eb/a6/84/eba684cf1b67c0b6316d77af426d2c9b.jpg" class="avatar">
-
-    <a href="https://www.instagram.com/nastyakulish39" class="btn instagram">Instagram</a>
-    <a href="https://tiktok.com/@nasty2765" class="btn tiktok">TikTok</a>
-    <a href="https://t.me/qqqidjd" class="btn telegram">Telegram</a>
+<div class="sale">РАСПРОДАЖА</div>
+<h3>Конопля</h3>
+<p>1г 150 UA</p>
+<div class="stock">🟢 В наличии</div>
+<button onclick="add('Конопля',150,true)">В корзину</button>
 </div>
+
+<div class="card">
+<div class="sale">РАСПРОДАЖА</div>
+<h3>Амфетамин</h3>
+<p>0</p>
+<div class="stock">🔴 Нет в наличии</div>
+<button onclick="add('Амфетамин',0,false)">В корзину</button>
+</div>
+
+<div class="card">
+<div class="sale">РАСПРОДАЖА</div>
+<h3>Очищенные семена (ядра конопли)</h3>
+<p>1 кг 500 UA</p>
+<div class="stock">🟢 В наличии</div>
+<button onclick="add('Очищенные семена (ядра конопли)',500,true)">В корзину</button>
+</div>
+
+<div class="card">
+<div class="sale">РАСПРОДАЖА</div>
+<h3>Альфа-PVP</h3>
+<p>1 пластинка 125 UA</p>
+<div class="stock">🟢 В наличии</div>
+<button onclick="add('Альфа-PVP',125,true)">В корзину</button>
+</div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+<h2>О нас</h2>
+<div class="about">
+Ace Shop — магазин экологичных товаров: ткани и саженцы деревьев.  
+Мы делаем мир зеленее 🌿  
+Качественные товары для дома и посадки.
+</div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+<h2>Контакты</h2>
+<p>Telegram:</p>
+<a href="https://t.me/AceShopOfficial_bot" target="_blank">@AceShopOfficial_bot</a>
+</section>
+
+<!-- CART BUTTON -->
+<div class="cartBtn" onclick="toggleCart()">
+🛒
+<div class="badge" id="count">0</div>
+</div>
+
+<!-- CART -->
+<div class="cartBox" id="cartBox">
+<div id="list"></div>
+
+<div class="total">Итого: <span id="sum">0</span>UA</div>
+
+<div style="margin-top:10px;font-size:12px;">
+<b>Как оформить заказ:</b><br>
+Сделай скрин и отправь в Telegram 📸
+</div>
+
+<button class="orderBtn" onclick="openTG()">
+Перейти в Telegram
+</button>
+</div>
+
+<script>
+let cart=[];
+
+function show(id){
+document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+
+function add(name,price,stock){
+if(!stock){
+alert("Нет в наличии");
+return;
+}
+
+let item=cart.find(i=>i.name===name);
+if(item) item.qty++;
+else cart.push({name,price,qty:1});
+
+render();
+}
+
+function toggleCart(){
+let box=document.getElementById('cartBox');
+box.style.display = box.style.display==="block"?"none":"block";
+}
+
+function change(name,d){
+let item=cart.find(i=>i.name===name);
+if(!item) return;
+item.qty+=d;
+if(item.qty<=0) cart=cart.filter(i=>i.name!==name);
+render();
+}
+
+function render(){
+let list=document.getElementById('list');
+list.innerHTML="";
+
+let sum=0;
+let count=0;
+
+cart.forEach(i=>{
+sum+=i.price*i.qty;
+count+=i.qty;
+
+list.innerHTML+=`
+<div class="cart-item">
+${i.name} x${i.qty}
+<div>
+<button class="smallBtn" onclick="change('${i.name}',1)">+</button>
+<button class="smallBtn" onclick="change('${i.name}',-1)">-</button>
+</div>
+</div>
+`;
+});
+
+document.getElementById('sum').innerText=sum;
+document.getElementById('count').innerText=count;
+}
+
+function openTG(){
+window.open("https://t.me/+8rdljQxYsjpiMTFi","_blank");
+}
+</script>
 
 </body>
 </html>
